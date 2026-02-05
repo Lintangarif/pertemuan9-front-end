@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latihan 1 - Show Data</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const root = ReactDOM.createRoot(document.getElementById("app"));
+
+    // 1. tambah gambar
+    const phoneData = [
+      {
+        name: "iPhone X",
+        price: 10000000,
+        discount: 50,
+        image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=200&q=80"
+      },
+      {
+        name: "Oppo Find X",
+        price: 14000000,
+        discount: 30,
+        image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400"
+      },
+      {
+        name: "Redmi Note X",
+        price: 5000000,
+        discount: 0,
+        image: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=200&q=80"
+      },
+    ];
+
+    // 2. nerima gambar
+    function Product({ name, price, discount = 0, image }) {
+      return (
+        <div style={{border: "1px solid #ddd", borderRadius: "8px", padding: "16px", margin: "10px", width: "220px", fontFamily: "Arial"}}>
+          {/* Menampilkan Gambar */}
+          <img 
+            src={image} 
+            alt={name} 
+            style={{width: "100%", height: "150px", objectFit: "cover", borderRadius: "4px"}} 
+          />
+          
+          <h3>{name}</h3>
+          
+          {/* Logika Diskon (Conditional Rendering) */}
+          {discount > 0 && (
+            <p style={{color: "gray", fontSize: "14px"}}>
+              <s>Rp {price.toLocaleString()}</s> <span style={{color: "red"}}>({discount}%)</span>
+            </p>
+          )}
+
+          {/* Menghitung Harga Akhir */}
+          <p style={{fontSize: "18px", fontWeight: "bold"}}>
+            Rp {(price - (price * discount / 100)).toLocaleString()}
+          </p>
+        </div>
+      );
+    }
+
+    // 3. looping
+    function App() {
+      return (
+        <div style={{display: "flex", gap: "10px", flexWrap: "wrap", justifyContent: "center"}}>
+          {phoneData.map((phone, index) => (
+            <Product
+              key={index}
+              name={phone.name}
+              price={phone.price}
+              discount={phone.discount}
+              image={phone.image}
+            />
+          ))}
+        </div>
+      );
+    }
+
+    root.render(<App />);
+  </script>
+</body>
+</html>

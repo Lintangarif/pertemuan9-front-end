@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Latihan 2 - IF Else </title>
+</head>
+<body>
+  <div id="app"></div>
+  
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="text/babel">
+    const app = document.getElementById("app");
+    const root = ReactDOM.createRoot(app);
+
+    // gambar hp
+    const phoneData = [
+      { 
+        name: "iPhone X", 
+        price: 10000000, 
+        discount: 50, 
+        image: "https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=400",
+        brand: "Apple" 
+      },
+      { 
+        name: "Oppo Find X", 
+        price: 14000000, 
+        discount: 30, 
+        image: "https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?w=400",
+        brand: "Oppo" 
+      },
+      { 
+        name: "Redmi Note X", 
+        price: 5000000, 
+        discount: 0, 
+        image: "https://images.unsplash.com/photo-1565849904461-04a58ad377e0?w=400",
+        brand: "Xiaomi" 
+      },
+    ];
+
+    // komponen product 
+    function Product({ name, price, discount = 0, image, brand }) {
+      
+      // os
+      let operatingSystem = "";
+      if (brand === "Apple") {
+        operatingSystem = "iOS";
+      } else {
+        operatingSystem = "Android";
+      }
+
+      return (
+        <div style={{border: "1px solid #ccc", padding: "10px", margin: "10px", width: "220px", float: "left", fontFamily: "Arial"}}>
+          
+          {/* gambar dari latihan 1 */}
+          <img src={image} alt={name} style={{width: "100%", height: "150px", objectFit: "cover", borderRadius: "5px"}}/>
+          
+          <h3>{name}</h3>
+          
+          {/* info os dari latihan 2 */}
+          <p style={{background: "#eee", padding: "5px", borderRadius: "4px", fontSize: "14px"}}>
+            <b>{brand}</b> - {operatingSystem}
+          </p>
+
+          {discount > 0 && <p style={{color: "gray"}}><s>Rp {price}</s> <span style={{color: "red"}}>({discount}%)</span></p>}
+          
+          <p><b>Rp {parseInt(price) - (parseInt(price) * (parseInt(discount) / 100))}</b></p>
+        </div>
+      );
+    }
+
+    function App() {
+      return (
+        <div>
+          <h2 style={{marginLeft: "10px", clear: "both"}}>Daftar Produk (Lengkap)</h2>
+          <div style={{overflow: "hidden"}}>
+            {phoneData.map((phone, id) => (
+              <Product
+                key={id}
+                name={phone.name}
+                price={phone.price}
+                discount={phone.discount}
+                image={phone.image}
+                brand={phone.brand}
+              />
+            ))}
+          </div>
+        </div>
+      );
+    }
+
+    root.render(<App/>);
+  </script>
+</body>
+</html>

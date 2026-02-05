@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Step 2 - React Klasik</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script>
+        const app = document.getElementById("app");
+        const root = ReactDOM.createRoot(app);
+        
+        // Membuat elemen tombol tanpa HTML tag
+        const button = React.createElement('button', { onClick: () => alert('Hai!') }, 'Klik Saya');
+        const container = React.createElement('div', null, button);
+        
+        root.render(container);
+    </script>
+</body>
+</html>
+

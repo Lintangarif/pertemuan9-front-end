@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Step 4 - Props</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.getElementById("app"));
+
+        // Menerima data lewat parameter 'props'
+        function Product(props) {
+            // Menghitung harga akhir langsung di variabel
+            const finalPrice = props.price - (props.price * props.discount / 100);
+            
+            return (
+                <div style={{marginBottom: '20px'}}>
+                    <h2>{props.name}</h2>
+                    <p>Harga Awal: Rp {props.price}</p>
+                    <p>Diskon: {props.discount}%</p>
+                    <p><b>Harga Akhir: Rp {finalPrice}</b></p>
+                </div>
+            );
+        }
+
+        function App() {
+            return (
+                <div>
+                    <h1>Daftar Produk (Manual Props)</h1>
+                    <Product name="iPhone X" price={10000000} discount={50} />
+                    <Product name="Oppo Find X" price={14000000} discount={30} />
+                </div>
+            );
+        }
+
+        root.render(<App />);
+    </script>
+</body>
+</html>

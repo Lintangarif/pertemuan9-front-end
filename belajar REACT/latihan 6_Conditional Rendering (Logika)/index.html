@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Step 6 - Conditional</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+        const root = ReactDOM.createRoot(document.getElementById("app"));
+
+        const dataHP = [
+            { name: "iPhone X", stock: 5 },
+            { name: "Samsung S23", stock: 0 }, // Stok habis
+            { name: "Xiaomi 13", stock: 12 }
+        ];
+
+        function Product({ name, stock }) {
+            return (
+                <div style={{borderBottom: '1px solid #ccc', padding: '10px'}}>
+                    <h3>{name}</h3>
+                    {/* Logika: Jika stok > 0 tampilkan 'Tersedia', jika 0 tampilkan 'Habis' */}
+                    {stock > 0 ? (
+                        <p style={{color: 'green'}}>Stok Tersedia: {stock} unit</p>
+                    ) : (
+                        <p style={{color: 'red'}}>Stok Habis!</p>
+                    )}
+                </div>
+            );
+        }
+
+        function App() {
+            return (
+                <div>
+                    <h1>Status Stok Barang</h1>
+                    {dataHP.map((hp, index) => (
+                        <Product key={index} name={hp.name} stock={hp.stock} />
+                    ))}
+                </div>
+            );
+        }
+
+        root.render(<App />);
+    </script>
+</body>
+</html>
